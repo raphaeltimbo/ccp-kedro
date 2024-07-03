@@ -53,3 +53,36 @@ def calculate_flow(data_filtered, parameters):
         raise ValueError("Flow rate not found in the DataFrame.")
 
     return df
+
+
+def create_clusters(data_with_flow):
+    df = data_with_flow
+    # create clusters based on speed_sound, ps and Ts
+    data = df[["speed_sound", "ps", "Ts"]]
+    # normalize
+    data_mean = data.mean()
+    data_std = data.std()
+    data_norm = (data - data_mean) / data_std
+
+    # Using sklearn
+    kmeans = KMeans(n_clusters=5, n_init="auto")
+    kmeans.fit(data_norm)
+
+    # Format results as a DataFrame
+    df["cluster"] = kmeans.labels_
+    for i in range(kmeans.n_clusters):
+        df.loc[df["cluster"] == i, "speed_sound_center"] = (
+            kmeans.cluster_centers_[i][0] * data_std["speed_sound"]
+        ) + data_mean["speed_sound"]
+        df.loc[df["cluster"] == i, "ps_center"] = (
+            kmeans.cluster_centers_[i][1] * data_std["ps"]
+        ) + data_mean["ps"]
+        df.loc[df["cluster"] == i, "Ts_center"] = (
+            kmeans.cluster_centers_[i][0] * data_std["Ts"]
+        ) + data_mean["Ts"]
+
+    return df
+
+
+def create_impellers(parameters):
+    pass
