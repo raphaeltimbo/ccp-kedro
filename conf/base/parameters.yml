@@ -1,31 +1,32 @@
-case_a:
-  fluid:
-    methane: 58.976
-    ethane: 3.099
-    propane: 0.6
-    n-butane: 0.08
-    i-butane: 0.05
-    n-pentane: 0.01
-    i-pentane: 0.01
-    n2: 0.55
-    h2s: 0.02
-    co2: 36.605
-  ps: 400000.0
-  Ts: 313.15
-case_b:
-  fluid:
-    methane: 58.976
-    ethane: 3.099
-    propane: 0.6
-    n-butane: 0.08
-    i-butane: 0.05
-    n-pentane: 0.01
-    i-pentane: 0.01
-    n2: 0.55
-    h2s: 0.02
-    co2: 36.605
-  ps: 400000.0
-  Ts: 313.15
+cases:
+  case_a:
+    fluid:
+      methane: 58.976
+      ethane: 3.099
+      propane: 0.6
+      n-butane: 0.08
+      i-butane: 0.05
+      n-pentane: 0.01
+      i-pentane: 0.01
+      n2: 0.55
+      h2s: 0.02
+      co2: 36.605
+    ps: 400000.0
+    Ts: 313.15
+  case_b:
+    fluid:
+      methane: 58.976
+      ethane: 3.099
+      propane: 0.6
+      n-butane: 0.08
+      i-butane: 0.05
+      n-pentane: 0.01
+      i-pentane: 0.01
+      n2: 0.55
+      h2s: 0.02
+      co2: 36.605
+    ps: 400000.0
+    Ts: 313.15
 data_units:
   ps: bar
   Ts: degC

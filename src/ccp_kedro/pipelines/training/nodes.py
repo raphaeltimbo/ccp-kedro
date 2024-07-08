@@ -111,4 +111,6 @@ def create_clusters(data_with_flow):
 
 
 def create_impellers(parameters):
+    cases = parameters["cases"]
+    impellers = []
     pass
