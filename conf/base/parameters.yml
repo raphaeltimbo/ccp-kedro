@@ -33,14 +33,20 @@ data_units:
   Td: degC
   flow_v: m³/s
   speed: RPM
+  D: m
+  d: m
+  delta_p: mmH2O
+D: 0.590550
+d: 0.366130
+tappings: flange
 operation_fluid:
-  methane: 58.976
-  ethane: 3.099
-  propane: 0.6
-  n-butane: 0.08
+  methane: 44.04
+  ethane: 3.18
+  propane: 0.66
+  n-butane: 0.15
   i-butane: 0.05
-  n-pentane: 0.01
-  i-pentane: 0.01
-  n2: 0.55
-  h2s: 0.02
-  co2: 36.605
+  n-pentane: 0.03
+  i-pentane: 0.02
+  n2: 0.25
+  h2s: 0.06
+  co2: 51.55

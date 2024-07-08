@@ -24,6 +24,7 @@ def create_pipeline(**kwargs) -> Pipeline:
                 outputs="data_with_clusters",
                 name="create_clusters_node",
             ),
-
+            # convert curves
+            # save impellers
         ]
     )
