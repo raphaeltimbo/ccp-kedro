@@ -68,12 +68,14 @@ def calculate_flow(data_filtered, parameters):
         if "flow_v" in df.columns:
             # create flow_m column
             df["flow_m"] = (
-                Q_(df["flow_v"].array, data_units["flow_v"]) * Q_(df["v_s"].array, "m³/kg")
+                Q_(df["flow_v"].array, data_units["flow_v"])
+                * Q_(df["v_s"].array, "m³/kg")
             ).m
         elif "flow_m" in df.columns:
             # create flow_v column
             df["flow_v"] = (
-                Q_(df["flow_m"].array, data_units["flow_m"]) / Q_(df["v_s"].array, "m³/kg")
+                Q_(df["flow_m"].array, data_units["flow_m"])
+                / Q_(df["v_s"].array, "m³/kg")
             ).m
         else:
             raise ValueError("Flow rate not found in the DataFrame.")
@@ -113,4 +115,10 @@ def create_clusters(data_with_flow):
 def create_impellers(parameters):
     cases = parameters["cases"]
     impellers = []
+    for case, case_parameters in cases.items():
+        ps = Q_(case_parameters["ps"], case_parameters["ps_units"])
+        Ts = Q_(case_parameters["Ts"], case_parameters["Ts_units"])
+        fluid = case_parameters["fluid"]
+        suc = ccp.State(p=ps, T=Ts, fluid=fluid)
+        # TODO: create impeller
     pass
