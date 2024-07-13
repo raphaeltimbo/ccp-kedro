@@ -11,8 +11,10 @@ cases:
       n2: 0.55
       h2s: 0.02
       co2: 36.605
-    ps: 400000.0
-    Ts: 313.15
+    ps: 4
+    ps_units: "bar"
+    Ts: 40
+    Ts_units: degC
   case_b:
     fluid:
       methane: 58.976
@@ -25,8 +27,10 @@ cases:
       n2: 0.55
       h2s: 0.02
       co2: 36.605
-    ps: 400000.0
-    Ts: 313.15
+    ps: 4
+    ps_units: "bar"
+    Ts: 40
+    Ts_units: degC
 data_units:
   ps: bar
   Ts: degC
