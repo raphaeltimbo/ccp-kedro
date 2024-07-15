@@ -3,7 +3,7 @@ import pandas as pd
 import yaml
 from pathlib import Path
 from sklearn.cluster import KMeans
-
+from tqdm.auto import tqdm
 Q_ = ccp.Q_
 
 
@@ -83,7 +83,8 @@ def calculate_flow(data_filtered, parameters):
     return df
 
 
-def create_clusters(data_with_flow):
+def create_clusters(data_with_flow, parameters):
+    operation_fluid = parameters["operation_fluid"]
     df = data_with_flow
     # create clusters based on speed_sound, ps and Ts
     data = df[["speed_sound", "ps", "Ts"]]
@@ -109,10 +110,8 @@ def create_clusters(data_with_flow):
             kmeans.cluster_centers_[i][0] * data_std["Ts"]
         ) + data_mean["Ts"]
 
-    return df
-
-
-def create_impellers(parameters):
+    # create_impellers
+    data_path = Path(__file__).parents[4] / "data/01_raw"
     cases = parameters["cases"]
     impellers = []
     for case, case_parameters in cases.items():
@@ -120,5 +119,26 @@ def create_impellers(parameters):
         Ts = Q_(case_parameters["Ts"], case_parameters["Ts_units"])
         fluid = case_parameters["fluid"]
         suc = ccp.State(p=ps, T=Ts, fluid=fluid)
-        # TODO: create impeller
-    pass
+        imp = ccp.Impeller.load_from_engauge_csv(
+            suc=suc,
+            curve_name=case,
+            curve_path=data_path,
+            flow_units="m³/h",
+            head_units="kJ/kg",
+        )
+        impellers.append(imp)
+
+    # convert curves
+    print("Converting curves")
+    impellers_new = []
+    for i in tqdm(range(kmeans.n_clusters)):
+        cluster_series = df[df["cluster"] == 0].iloc[0]
+        suc_new = ccp.State(
+            p=Q_(cluster_series.ps_center, parameters["data_units"]["ps"]),
+            T=Q_(cluster_series.Ts_center, parameters["data_units"]["Ts"]),
+            fluid=operation_fluid,
+        )
+        imp_new = ccp.Impeller.convert_from(impellers, suc=suc_new, speed="same")
+        impellers_new.append(imp_new)
+
+    return impellers_new

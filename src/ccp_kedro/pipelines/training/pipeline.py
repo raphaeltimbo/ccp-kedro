@@ -1,6 +1,6 @@
 from kedro.pipeline import Pipeline, node, pipeline
 
-from .nodes import filter_data, calculate_flow, create_clusters, create_impellers
+from .nodes import filter_data, calculate_flow, create_clusters
 
 
 def create_pipeline(**kwargs) -> Pipeline:
@@ -20,17 +20,9 @@ def create_pipeline(**kwargs) -> Pipeline:
             ),
             node(
                 func=create_clusters,
-                inputs="data_with_flow",
-                outputs="data_with_clusters",
+                inputs=["data_with_flow", "parameters"],
+                outputs="impellers_new",
                 name="create_clusters_node",
             ),
-            node(
-                func=create_impellers,
-                inputs=["parameters"],
-                outputs="impellers",
-                name="create_impellers_node",
-            )
-            # convert curves
-            # save impellers
         ]
     )
