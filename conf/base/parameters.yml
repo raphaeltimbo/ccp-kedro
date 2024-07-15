@@ -1,5 +1,5 @@
 cases:
-  case_a:
+  case-a:
     fluid:
       methane: 58.976
       ethane: 3.099
@@ -15,18 +15,18 @@ cases:
     ps_units: "bar"
     Ts: 40
     Ts_units: degC
-  case_b:
+  case-b:
     fluid:
-      methane: 58.976
-      ethane: 3.099
-      propane: 0.6
-      n-butane: 0.08
-      i-butane: 0.05
+      methane: 27.457 
+      ethane: 1.21
+      propane: 0.22
+      n-butane: 0.04
+      i-butane: 0.02
       n-pentane: 0.01
-      i-pentane: 0.01
-      n2: 0.55
+      i-pentane: 0.00
+      n2: 0.2
       h2s: 0.02
-      co2: 36.605
+      co2: 70.823
     ps: 4
     ps_units: "bar"
     Ts: 40
