@@ -1,4 +1,5 @@
-from kedro.pipeline import Pipeline, node, pipeline
+from kedro.pipeline import Pipeline, node
+from kedro.pipeline.modular_pipeline import pipeline
 
 from .nodes import filter_data, calculate_flow, create_clusters
 

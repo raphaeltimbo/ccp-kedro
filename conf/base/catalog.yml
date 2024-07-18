@@ -6,3 +6,27 @@
 data:
   type: pandas.ParquetDataSet
   filepath: data/01_raw/data_delta_p.parquet
+
+impellers_new:
+  type: pickle.PickleDataSet
+  filepath: data/06_models/impellers_new.pkl
+
+# impeller_0:
+#   type: pickle.PickleDataSet
+#   filepath: data/06_models/impeller_0.pkl
+
+# impeller_1:
+#   type: pickle.PickleDataSet
+#   filepath: data/06_models/impeller_1.pkl
+
+# impeller_2:
+#   type: pickle.PickleDataSet
+#   filepath: data/06_models/impeller_2.pkl  
+
+# impeller_3:    
+#   type: pickle.PickleDataSet
+#   filepath: data/06_models/impeller_3.pkl 
+  
+# impeller_4: 
+#   type: pickle.PickleDataSet
+#   filepath: data/06_models/impeller_4.pkl

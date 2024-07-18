@@ -20,6 +20,7 @@
 import re
 
 from kedro.framework.cli.utils import find_stylesheets
+from recommonmark.transform import AutoStructify
 
 from ccp_kedro import __version__ as release
 
@@ -52,7 +53,7 @@ extensions = [
     "sphinx.ext.viewcode",
     "sphinx.ext.mathjax",
     "nbsphinx",
-    "myst_parser",
+    "recommonmark",
     "sphinx_copybutton",
 ]
 
@@ -222,3 +223,6 @@ def setup(app):
     # add Kedro stylesheets
     for stylesheet in find_stylesheets():
         app.add_css_file(stylesheet)
+    # enable rendering RST tables in Markdown
+    app.add_config_value("recommonmark_config", {"enable_eval_rst": True}, True)
+    app.add_transform(AutoStructify)
