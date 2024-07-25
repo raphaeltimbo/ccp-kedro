@@ -1,29 +1,16 @@
 from kedro.pipeline import Pipeline, node
 from kedro.pipeline.modular_pipeline import pipeline
 
-from .nodes import filter_data, calculate_flow, create_clusters
-
+from .nodes import evaluate
 
 def create_pipeline(**kwargs) -> Pipeline:
     return pipeline(
         [
             node(
-                func=filter_data,
-                inputs="data",
-                outputs="data_filtered",
-                name="filter_data_node",
-            ),
-            node(
-                func=calculate_flow,
-                inputs=["data_filtered", "parameters"],
-                outputs="data_with_flow",
-                name="calculate_flow_node",
-            ),
-            node(
-                func=create_clusters,
-                inputs=["data_with_flow", "parameters"],
-                outputs="impellers_new",
-                name="create_clusters_node",
+                func=evaluate,
+                inputs=["parameters", "data"],
+                outputs="evaluation",
+                name="evaluate_node",
             ),
         ]
     )
