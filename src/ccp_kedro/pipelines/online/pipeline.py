@@ -8,7 +8,7 @@ def create_pipeline(**kwargs) -> Pipeline:
         [
             node(
                 func=calculate_points,
-                inputs=["parameters", "data_online", "impellers_new"],
+                inputs=["evaluation", "data"],
                 outputs="data_calculated",
                 name="calculate_points_node",
             ),
